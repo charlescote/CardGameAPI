@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Game {
-    private GameDeck gameDeck;
+    private GameDeck gameDeck = new GameDeck();
     private ArrayList<Deck> decks = new ArrayList<Deck>();
     
     private Map<String, Player> players = new HashMap<String, Player>();
@@ -14,6 +14,9 @@ public class Game {
     private static Game instance = null;
     
     
+    /**
+     * Singleton to ensure there's only one game running
+     */
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -26,6 +29,9 @@ public class Game {
         return instance;
     }
     
+    /**
+     * Create a deck of 52 unique playing cards
+     */
     public void createDeck() {
         Deck newDeck = new Deck();
         decks.add(newDeck);
@@ -35,6 +41,9 @@ public class Game {
         return decks.size();
     }
     
+    /**
+     * Fold a deck into main game deck
+     */
     public boolean addDeckToGameDeck() {
         if (decks.isEmpty()) {
             return false;

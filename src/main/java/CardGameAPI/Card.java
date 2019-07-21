@@ -50,7 +50,6 @@ public class Card implements Comparable<Card> {
     
     
     public enum Rank {
-    	NORANK(0),
         ACE(1),
         TWO(2),
         THREE(3),
@@ -116,7 +115,7 @@ public class Card implements Comparable<Card> {
      */
     public Card(Suit suit) {
         this.suit = suit;
-        this.rank = Rank.NORANK;
+        this.rank = null;
     }
     
     /**
@@ -150,14 +149,25 @@ public class Card implements Comparable<Card> {
      * Returns a JSON representation of the card.
      */
     public String toJson() {
-        return String.format("{ \"suit\": %s, \"rank\": %s }", this.suit.toString(), this.rank.toString());
+        return String.format("{ \"suit\": \"%s\", \"rank\": \"%s\" }", this.suit.toString(), this.rank.toString());
     }
     
+    /**
+     * Override hashCode for sorting
+     */
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+    
+    /**
+     * Override equals comparator for sorting
+     */
     @Override
     public boolean equals(Object obj){
     	Card card = (Card) obj;
     	if (card.suit == suit) {
-    		if (card.rank == Rank.NORANK) {
+    		if (this.rank == null) {
     			return true;
     		} else {
     			return card.rank == this.rank;
@@ -168,7 +178,7 @@ public class Card implements Comparable<Card> {
     }
     
     /**
-     * Comparator for sorting
+     * Override compareTo comparator for sorting
      */
     @Override
     public int compareTo(Card otherCard) {
@@ -176,7 +186,7 @@ public class Card implements Comparable<Card> {
         if( suits != 0) {
             return suits;
         } else {
-            return rank.getValue() - otherCard.rank.getValue();
+            return otherCard.rank.getValue() - rank.getValue();
         }
     }
 }

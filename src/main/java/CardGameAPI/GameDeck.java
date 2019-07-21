@@ -53,7 +53,7 @@ public class GameDeck {
     	int numSpades = Collections.frequency(gameDeck, new Card(Card.Suit.SPADES));
     	int numClubs = Collections.frequency(gameDeck, new Card(Card.Suit.CLUBS));
     	int numDiamonds = Collections.frequency(gameDeck, new Card(Card.Suit.DIAMONDS));
-    	String suitCounts = String.format("[ { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d } ] ",
+    	String suitCounts = String.format("[ { \"suit\": \"%s\", \"count\": %d }, { \"suit\": \"%s\", \"count\": %d }, { \"suit\": \"%s\", \"count\": %d }, { \"suit\": \"%s\", \"count\": %d } ] ",
     			Card.Suit.HEARTS.toString(), numHearts,
     			Card.Suit.SPADES.toString(), numSpades,
     			Card.Suit.CLUBS.toString(), numClubs,
@@ -73,12 +73,17 @@ public class GameDeck {
         
     	Collections.sort(cards);
         for (Card card : cards) {
-            Integer count = counts.get(card); 
-            counts.put(card, (count == null) ? 1 : count + 1); 
+            Integer count = counts.get(card);
+            
+            if (counts.containsKey(card)) {
+                counts.replace(card, count + 1);
+            } else {
+                counts.put(card, 1);
+            }
         }
         
         for (Map.Entry<Card, Integer> count : counts.entrySet()) {
-            array += String.format("{ \"suit\": %s, \"rank\": %s, \"count\": %d }, ", count.getKey().getSuit(), count.getKey().getRank(), count.getValue());
+            array += String.format("{ \"suit\": \"%s\", \"rank\": \"%s\", \"count\": %d }, ", count.getKey().getSuit(), count.getKey().getRank(), count.getValue());
         }
         
         if (array != "") {

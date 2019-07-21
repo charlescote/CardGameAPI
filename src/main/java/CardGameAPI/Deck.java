@@ -3,8 +3,6 @@ package cardgameapi;
 import java.util.ArrayList;
 
 public class Deck {
-    public static final int CARDS_IN_DECK = 52;
-    
     private ArrayList<Card> deck = new ArrayList<>();
     
     
