@@ -26,7 +26,6 @@ Create a new game:
 Delete the game:
   http://localhost:8080/api/game/delete
 
-
 Add a player:
   http://localhost:8080/api/game/players/{id}/add
 
