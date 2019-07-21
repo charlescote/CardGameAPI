@@ -93,4 +93,8 @@ public class Game {
         }
         return "[ " + array + " ]";
     }
+    
+    public String listUndealtCardSuits() {
+        return gameDeck.getUndealtSuitCounts();
+    }
 }

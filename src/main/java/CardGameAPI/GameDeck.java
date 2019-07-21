@@ -50,7 +50,7 @@ public class GameDeck {
     	int numSpades = Collections.frequency(gameDeck, new Card(Card.Suit.SPADES));
     	int numClubs = Collections.frequency(gameDeck, new Card(Card.Suit.CLUBS));
     	int numDiamonds = Collections.frequency(gameDeck, new Card(Card.Suit.DIAMONDS));
-    	String suitCounts = String.format("%s: %d\n%s: %d\n%s: %d\n%s: %d", 
+    	String suitCounts = String.format("[ { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d }, { \"suit\": %s, \"count\": %d } ] ",
     			Card.Suit.HEARTS.toString(), numHearts,
     			Card.Suit.SPADES.toString(), numSpades,
     			Card.Suit.CLUBS.toString(), numClubs,

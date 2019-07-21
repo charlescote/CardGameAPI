@@ -78,6 +78,14 @@ public class GameController {
         return failureResponse("No cards to be shuffled.");
     }
     
+    @RequestMapping(value = "/gamedeck/undealt", method = RequestMethod.GET)
+    public String getUndealt() {
+        if (game == null) {
+            return failureResponse("Game has not been created.").toString();
+        }
+        return game.listUndealtCardSuits();
+    }
+    
     @RequestMapping(value = "/players/{id}/add", method = RequestMethod.POST)
     public Response addPlayer(@PathVariable String id) {
         if (game == null) {
