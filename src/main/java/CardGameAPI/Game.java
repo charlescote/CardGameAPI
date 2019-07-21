@@ -97,4 +97,8 @@ public class Game {
     public String listUndealtCardSuits() {
         return gameDeck.getUndealtSuitCounts();
     }
+    
+    public String listUndealtCardCounts() {
+        return gameDeck.getUndealtCardCounts();
+    }
 }

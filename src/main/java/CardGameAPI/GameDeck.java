@@ -2,6 +2,9 @@ package cardgameapi;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map; 
+import java.util.Map.Entry;
 import java.util.Random;
 
 public class GameDeck {
@@ -56,6 +59,33 @@ public class GameDeck {
     			Card.Suit.CLUBS.toString(), numClubs,
     			Card.Suit.DIAMONDS.toString(), numDiamonds);
     	return suitCounts;
+    }
+    
+    /**
+     * Lists the count of individual undealt cards
+     *
+     * @param string of suit counts
+     */
+    public String getUndealtCardCounts() {
+        String array = "";
+        ArrayList<Card> cards = new ArrayList<Card>(gameDeck);
+        Map<Card, Integer> counts = new LinkedHashMap<Card, Integer>();
+        
+    	Collections.sort(cards);
+        for (Card card : cards) {
+            Integer count = counts.get(card); 
+            counts.put(card, (count == null) ? 1 : count + 1); 
+        }
+        
+        for (Map.Entry<Card, Integer> count : counts.entrySet()) {
+            array += String.format("{ \"suit\": %s, \"rank\": %s, \"count\": %d }, ", count.getKey().getSuit(), count.getKey().getRank(), count.getValue());
+        }
+        
+        if (array != "") {
+            array = array.substring(0, array.length() - 2);
+        }
+        
+        return "[ " + array + " ]";
     }
     
     /**

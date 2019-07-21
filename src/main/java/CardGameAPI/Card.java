@@ -1,6 +1,6 @@
 package cardgameapi;
 
-public class Card {
+public class Card implements Comparable<Card> {
     private final Suit suit;
     private final Rank rank;
     
@@ -9,12 +9,32 @@ public class Card {
      * The suits that a card can bear
      */
     public enum Suit {
-        HEARTS,
-        SPADES,
-        CLUBS,
-        DIAMONDS
+        HEARTS(0),
+        SPADES(1),
+        CLUBS(2),
+        DIAMONDS(3)
         ;
         
+        private final int value;
+        
+        
+        /**
+         * Constructor for value initialization
+         *
+         * @param value rank of the suit of the card
+         */
+        Suit(int value) {
+            this.value = value;
+        }
+
+        /**
+         * Returns the value of the suit
+         *
+         * @return rank value
+         */
+        public int getValue() {
+            return value;
+        }
         
         /**
          * Returns a string representation of the suit
@@ -100,6 +120,24 @@ public class Card {
     }
     
     /**
+     * Getter for the suit
+     *
+     * @return string value of suit
+     */
+    public String getSuit() {
+        return this.suit.toString();
+    }
+    
+    /**
+     * Getter for the rank
+     *
+     * @return string value of rank
+     */
+    public String getRank() {
+        return this.rank.toString();
+    }
+    
+    /**
      * Returns the value of the card
      *
      * @return card value
@@ -127,5 +165,18 @@ public class Card {
     	} else {
     		return false;
     	}
+    }
+    
+    /**
+     * Comparator for sorting
+     */
+    @Override
+    public int compareTo(Card otherCard) {
+        int suits = suit.getValue() - otherCard.suit.getValue();
+        if( suits != 0) {
+            return suits;
+        } else {
+            return rank.getValue() - otherCard.rank.getValue();
+        }
     }
 }
